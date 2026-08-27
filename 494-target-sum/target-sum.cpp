@@ -1,22 +1,27 @@
 class Solution {
 public:
+    int solve(int i, vector<int>& nums, int target, vector<map<int, int>>& dp) {
 
-    int solve(int i, vector<int> &a, int target){
-        if(i==0){
-            if (target == a[0] && target == -a[0]) return 2;
-            if(target-a[i]==0 || target+a[i]==0) return 1;
+        if (i == 0) {
+            if (target == nums[0] && target == -nums[0])
+                return 2;
+            if (target == nums[0] || target == -nums[0])
+                return 1;
+
             return 0;
         }
-        int add = solve(i-1, a, target+a[i]);
-        int sub = solve(i-1, a, target-a[i]);
+        if (dp[i].count(target))
+            return dp[i][target];
 
-        return (add+sub);
+        int add = solve(i - 1, nums, target + nums[i], dp);
+        int sub = solve(i - 1, nums, target - nums[i], dp);
+
+        return dp[i][target] = add + sub;
     }
 
     int findTargetSumWays(vector<int>& nums, int target) {
-        int n=nums.size();
-        return solve(n-1, nums, target);
+        int n = nums.size();
+        vector<map<int, int>> dp(n);
+        return solve(n - 1, nums, target, dp);
     }
 };
-
-// Recursive Code toh pakka TLE dega
