@@ -20,18 +20,21 @@ public:
     int longestCommonSubsequence(string text1, string text2) {
         int n = text1.size();
         int m = text2.size();
-        vector<vector<int>> dp(n+1, vector<int> (m+1,0));
+        // vector<vector<int>> dp(n+1, vector<int> (m+1,0));
+        vector<int> prev(m+1,0);
         // return solve(n-1,m-1,text1, text2, dp);
         for(int i=0;i<n;i++){
+            vector<int> curr(m+1, 0);
             for(int j=0; j<m;j++){
                 int take=0;
                 if(text1[i]==text2[j]){
-                 take = 1 + dp[i][j];
+                 take = 1 + prev[j];
                 }
-                int not_take = max(dp[i][j+1],dp[i+1][j]);
-                dp[i+1][j+1] = max(take, not_take); 
+                int not_take = max(prev[j+1],curr[j]);
+                curr[j+1] = max(take, not_take); 
             }
+            prev = curr;
         }
-        return dp[n][m];
+        return prev[m];
     }
 };
