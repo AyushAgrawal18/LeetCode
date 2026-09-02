@@ -1,21 +1,21 @@
 class Solution {
 public:
 
-    int solve(int i, vector<int> &a, int buy, vector<vector<int>> &dp){
-        int n=a.size();
+    // int solve(int i, vector<int> &a, int buy, vector<vector<int>> &dp){
+    //     int n=a.size();
 
-        if(i==n+1) return 0;
-        if(dp[i][buy]!=-1) return dp[i][buy];
+    //     if(i==n+1) return 0;
+    //     if(dp[i][buy]!=-1) return dp[i][buy];
 
-        int profit;
-        if(buy){
-            profit=max(-a[i-1]+solve(i+1, a, 0, dp), solve(i+1, a, 1, dp));
-        }
-        else{
-            profit=max(a[i-1]+solve(i+1, a, 1, dp), solve(i+1, a, 0, dp));
-        }
-        return dp[i][buy] = profit;
-    }
+    //     int profit;
+    //     if(buy){
+    //         profit=max(-a[i-1]+solve(i+1, a, 0, dp), solve(i+1, a, 1, dp));
+    //     }
+    //     else{
+    //         profit=max(a[i-1]+solve(i+1, a, 1, dp), solve(i+1, a, 0, dp));
+    //     }
+    //     return dp[i][buy] = profit;
+    // }
 
     int maxProfit(vector<int>& prices) {
         int buy = 1;
