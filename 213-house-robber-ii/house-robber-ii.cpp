@@ -21,7 +21,7 @@ public:
 
 
     int rob(vector<int>& nums) {
-        vector<vector<int>> dp(nums.size()+1, vector<int> (2, -1));
+        vector<vector<int>> dp(nums.size(), vector<int> (2, -1));
         return solve(0, nums, 0, dp);
     }
 };
